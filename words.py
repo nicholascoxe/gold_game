@@ -6,7 +6,6 @@ WORDLIST = 'wordlist.txt'
 
 
 def get_random_word(min_word_length):
-    """Get a random word from the wordlist using no extra memory."""
     num_words_processed = 0
     curr_word = None
     with open(WORDLIST, 'r') as f:

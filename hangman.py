@@ -20,7 +20,6 @@ def get_num_attempts():
 
 
 def get_min_word_length():
-    """Get user-inputted minimum word length for the game."""
     while True:
         min_word_length = input(
             'What minimum word length do you want? [4-16] ')
@@ -36,7 +35,6 @@ def get_min_word_length():
 
 
 def get_display_word(word, idxs):
-    """Get the word suitable for display."""
     if len(word) != len(idxs):
         raise ValueError('Word length and indices length are not the same')
     displayed_word = ''.join(
@@ -45,7 +43,6 @@ def get_display_word(word, idxs):
 
 
 def get_next_letter(remaining_letters):
-    """Get the user-inputted next letter."""
     if len(remaining_letters) == 0:
         raise ValueError('There are no remaining letters')
     while True:
@@ -73,7 +70,7 @@ def play_hangman():
     word = get_random_word(min_word_length)
     print()
 
-    # Initialize game state variables
+    # Initialize variables
     idxs = [letter not in ascii_lowercase for letter in word]
     remaining_letters = set(ascii_lowercase)
     wrong_letters = []
@@ -86,7 +83,7 @@ def play_hangman():
         print('Attempts Remaining: {0}'.format(attempts_remaining))
         print('Previous Guesses: {0}'.format(' '.join(wrong_letters)))
 
-        # Get player's next letter guess
+        # Get players next letter guess
         next_letter = get_next_letter(remaining_letters)
 
         # Check if letter guess is in word
@@ -100,7 +97,7 @@ def play_hangman():
                     idxs[i] = True
         else:
             # Guessed incorrectly
-            print('{0} is NOT in the word!'.format(next_letter))
+            print('{0} is not in the word.'.format(next_letter))
 
             # Decrement num of attempts left and append guess to wrong guesses
             attempts_remaining -= 1
@@ -111,16 +108,16 @@ def play_hangman():
             word_solved = True
         print()
 
-    # The game is over: reveal the word
+    # The game is over
     print('The word is {0}'.format(word))
 
-    # Notify player of victory or defeat
+    # win or lose
     if word_solved:
-        print('Congratulations! You won!')
+        print(' You won!')
     else:
-        print('Try again next time!')
+        print('Try again!')
 
-    # Ask player if he/she wants to try again
+    # Ask player if wants to try again
     try_again = input('Would you like to try again? [y/n] ')
     return try_again.lower() == 'y'
 
